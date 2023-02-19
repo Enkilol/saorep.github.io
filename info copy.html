@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Informazioni sul prodotto</title>
+  </head>
+
+
+  <body>
+    <div class="container p-5 my-5">
+      <h1>Informazioni sul prodotto</h1>
+      <div>
+        <img src=$"{url_immagine}" width="50" height="50">
+        <h2 id="nome"></h2>
+
+        <p>Ingredienti:</p>
+        <p id="ingredienti"></p>
+        <hr>
+
+        <p>Descrizione:</p>
+        <p id="descrizione"></p>
+        <hr>
+
+        <p>Volumi:</p>
+        <p id="volumi"></p>
+
+        <hr>
+        <p>Punteggio:</p>
+        <p id="punteggio"></p>
+
+        <hr>
+        <h5 a href="https://enkilol.github.io/saorep.github.io/">Torna indietro</h5>
+      </div>
+    </div>
+    <script>
+      const queryString = new URLSearchParams(window.location.search);
+      const code = queryString.get("codice");
+
+      fetch(`federico301991.pythonanywhere.com/vini{codice}.json?lang=it`)
+        .then(response => response.json())
+        .then(vino => {
+          const nome = vino.nome;
+          const volumi = vino.volumi;
+          const ingredienti = vino.ingredienti;
+          const descrizione = vino.descrizione;
+          const punteggio = vino.punteggio;
+          const url_immagine = vino.url_immagine
+
+          // Mostra i dati sul prodotto
+          document.getElementById("nome").innerHTML = nome;
+          document.getElementById("volumi").innerHTML = volumi;
+          document.getElementById("ingredienti").innerHTML = ingredienti;
+          document.getElementById("descrizione").innerHTML = descrizione;
+          document.getElementById("punteggio").innerHTML = punteggio;
+          document.getElementById("url_immagine").innerHTML = url_immagine;
+        })
+        .catch(error => console.error(error));
+    </script>
+
+
+
+  </body>
+</html>
+
